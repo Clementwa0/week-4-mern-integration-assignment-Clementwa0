@@ -1,5 +1,3 @@
-// Post.js - Mongoose model for blog posts
-
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema(
@@ -20,7 +18,7 @@ const PostSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
+      
       unique: true,
     },
     excerpt: {
