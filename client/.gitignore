@@ -1,6 +1,4 @@
 # Logs
-
-mongodb+srv://clementwa01:cbXhRyIvU4f1l0Cj@cluster0.b1sabln.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 logs
 *.log
 npm-debug.log*
@@ -9,8 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-cbXhRyIvU4f1l0Cj
-mongodb+srv://clementwa01:cbXhRyIvU4f1l0Cj@cluster0.b1sabln.mongodb.net/"Dbname?retryWrites=true&w=majority&appName=Cluster0
 node_modules
 dist
 dist-ssr
