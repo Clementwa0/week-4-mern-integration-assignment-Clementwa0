@@ -3,17 +3,20 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
   {
+    clerkId: {
+      type: String,
+      unique: true,
+      sparse: true, // allow null for local users
+    },
     username: {
       type: String,
-      required: [true, 'Username is required'],
-      unique: true,
       trim: true,
       minlength: 3,
       maxlength: 30,
     },
     email: {
       type: String,
-      required: [true, 'Email is required'],
+      required: true,
       unique: true,
       lowercase: true,
       trim: true,
@@ -21,10 +24,9 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
       minlength: 6,
       select: false,
-     },
+    },
     role: {
       type: String,
       enum: ['user', 'admin'],
@@ -35,10 +37,9 @@ const userSchema = new mongoose.Schema(
       default: 'default-avatar.jpg',
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
+
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {

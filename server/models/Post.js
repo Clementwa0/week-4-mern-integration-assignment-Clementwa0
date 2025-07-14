@@ -18,7 +18,6 @@ const PostSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      
       unique: true,
     },
     excerpt: {

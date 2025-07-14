@@ -24,7 +24,7 @@ app.use(express.json()); // Parse incoming JSON
 // Routes
 app.use('/api/posts', postRoutes);
 app.use('/api/categories', categoryRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/auth', userRoutes);
 
 // Root route
 app.get('/', (req, res) => {

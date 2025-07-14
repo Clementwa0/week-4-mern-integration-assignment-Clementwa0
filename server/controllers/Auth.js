@@ -2,12 +2,18 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: '7d' }
+  );
 };
 
 exports.register = async (req, res) => {
   try {
-    const user = new User(req.body);
+    const { username, email, password } = req.body;
+
+    const user = new User({ username, email, password });
     await user.save();
 
     const token = generateToken(user);
@@ -17,9 +23,14 @@ exports.register = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
+        role: user.role,
+        avatar: user.avatar,
       },
     });
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).json({ message: 'Email or username already exists' });
+    }
     res.status(400).json({ message: err.message });
   }
 };
@@ -41,6 +52,8 @@ exports.login = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
+        role: user.role,
+        avatar: user.avatar,
       },
     });
   } catch (err) {
